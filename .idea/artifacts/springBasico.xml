@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="springBasico">
+    <output-path>$PROJECT_DIR$/out/artifacts/springBasico</output-path>
+    <root id="root" />
+  </artifact>
+</component>
