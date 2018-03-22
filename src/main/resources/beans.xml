@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- Anotacion para que reconozca las anotaciones ojo esta anotacion solo va a reconocer algunas de la anotaciones
+        tanto de spring como propias de java no hace la deteccions de beans, con lo cual es opcional -->
+    <context:annotation-config/>
+
+    <!-- Paquete donde revisara todas nuestros componentes -->
+    <context:component-scan base-package="pe.tuna.models"/>
+
+    <!-- clase propia de spring que nos permite reconocer las anotaciones propias del estandar de java -->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"></bean>
+
+    <bean id="mundo" class="pe.tuna.models.Mundo">
+        <property name="saludo" value="Hola Mundo"></property>
+    </bean>
+
+    <!-- Inicializacion por constructor
+    <bean id="persona1" class="pe.tuna.models.Persona">
+        <constructor-arg value="1"></constructor-arg>
+        <constructor-arg value="Miguel"></constructor-arg>
+        <constructor-arg value="Micky"></constructor-arg>
+    </bean> -->
+
+    <bean id="persona" class="pe.tuna.models.Persona">
+        <property name="pais" ref="pais"></property>
+        <property name="id" value="1"></property>
+        <property name="nombre" value="Miguel"></property>
+        <property name="apodo" value="Micky"></property>
+    </bean>
+
+    <!-- Ejemplo de bean con una sola ciudad -->
+    <bean id="pais" class="pe.tuna.models.Pais">
+        <property name="nombre" value="Peru"></property>
+        <!-- <property name="ciudad" ref="ciudad"></property> Esto es cuando es un solo objeto ciudad y no una lista -->
+        <property name="ciudades">
+            <list>
+                <ref bean="ciudad1"/>
+                <ref bean="ciudad2"/>
+                <ref bean="ciudad3"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- configuracion de un solo bean
+    <bean id="ciudad" class="pe.tuna.models.Ciudad">
+        <property name="nombre" value="Lima"></property>
+    </bean>
+    -->
+
+    <bean id="ciudad1" class="pe.tuna.models.Ciudad">
+        <property name="nombre" value="Lima"></property>
+    </bean>
+    <bean id="ciudad2" class="pe.tuna.models.Ciudad">
+        <property name="nombre" value="Piura"></property>
+    </bean>
+    <bean id="ciudad3" class="pe.tuna.models.Ciudad">
+        <property name="nombre" value="Chiclayo"></property>
+    </bean>
+
+</beans>
